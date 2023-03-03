@@ -11,8 +11,13 @@ Link.Action = ({ text, actionText, ...props }) => (
     <ChakraLink mr="4px" fontSize="16px" color="brand.darkGrey" {...props}>
       {text}
     </ChakraLink>
-    <ChakraLink fontWeight="bold" fontSize="16px" color="brand.black" {...props}>
-     {actionText}
+    <ChakraLink
+      fontWeight="bold"
+      fontSize="16px"
+      color="brand.black"
+      {...props}
+    >
+      {actionText}
     </ChakraLink>
   </Flex>
 )

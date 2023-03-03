@@ -9,7 +9,7 @@ export const Button = ({ children, ...props }) => (
     bg="brand.primary"
     _hover={{
       bg: 'brand.primary',
-      fontSize: "16.5px"
+      fontSize: '16.5px'
     }}
     {...props}
   >
