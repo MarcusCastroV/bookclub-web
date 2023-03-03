@@ -5,14 +5,16 @@ export const LoginScreen = () => {
   return (
     <Flex flexDir="row" w="100vw" h="100vh">
       <Flex
-        paddingLeft="112px"
-        alignItems="flex-start"
+        zIndex="1"
+        alignItems={['center', 'flex-start']}
         justifyContent="center"
+        paddingLeft={['0px', '0px', '0px', '112px']}
+        padding={['24px', '48px', '80px', '112px']}
         flexDir="column"
-        w="40%"
+        w={['100%', '100%', '100%', '40%']}
         h="100%"
       >
-        <Flex flexDir="column" w="416px">
+        <Flex flexDir="column" w={['100%', '100%', '100%', '416px']}>
           <Image
             src="/img/logo.svg"
             alt="BookClub Logo"
@@ -34,7 +36,7 @@ export const LoginScreen = () => {
         </Flex>
       </Flex>
       <Flex
-        w="60%"
+        w={['0px', '0%', '0%', '60%']}
         h="100%"
         backgroundImage="url('/img/auth_background.svg')"
         backgroundSize="cover"
@@ -42,6 +44,7 @@ export const LoginScreen = () => {
         backgroundRepeat="no-repeat"
         borderTopLeftRadius="32px"
         borderBottomLeftRadius="32px"
+        zIndex="0"
       />
     </Flex>
   )

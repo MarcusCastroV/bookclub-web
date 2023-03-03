@@ -11,6 +11,7 @@ export const Input = (props) => (
   <ChakraInput
     h="56px"
     fontSize="16px"
+    bg="brand.background"
     borderRadius="16px"
     focusBorderColor="brand.primary"
     {...props}
