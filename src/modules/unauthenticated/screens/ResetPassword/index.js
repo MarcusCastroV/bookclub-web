@@ -1,9 +1,8 @@
 import { Flex, Image } from '@chakra-ui/react'
-import { Text, Input, Link, Button } from 'components'
-import { useNavigate } from 'react-router-dom'
+import { Text, Input, Button, Link } from 'components'
 
-export const RegisterScreen = () => {
-  const navigate = useNavigate()
+export const ResetPasswordScreen = () => {
+
   return (
     <Flex flexDir="row" w="100vw" h="100vh">
       <Flex
@@ -22,23 +21,25 @@ export const RegisterScreen = () => {
             w="160px"
             height="48px"
           />
-          <Text.ScreenTitle mt="48px">Cadastro</Text.ScreenTitle>
-          <Input mt="24px" placeholder="Nome completo" />
-          <Input mt="16px" placeholder="E-mail" />
-          <Input mt="16px" placeholder="email@example.com" />
-          <Input.Password mt="16px" placeholder="Senha" />
-          <Input.Password mt="16px" placeholder="Confirmar senha" />
-          <Button mb="12px" mt="24px">Cadastrar</Button>
+          <Text.ScreenTitle mt="48px">Nova senha</Text.ScreenTitle>
+          <Text mt="24px">
+            Digite o código enviado e uma nova senha nos campos abaixo:
+          </Text>
+          <Input mt="24px" placeholder="ex: 0000" />
+          <Input.Password mt="24px" placeholder="Nova senha" />
+          <Input.Password mt="24px" placeholder="Confirmar nova senha" />
+          <Button mb="12px" mt="24px">Salvar</Button>
           <Link.Action
-           onClick={() => navigate('/')}
-            mt="8px"
-            text="Já possui conta?"
-            actionText="Faça login aqui"
+            flexDir={['column', 'row']}
+            mt='8px'
+            text="Não recebeu o código?"
+            actionText="Clique aqui para reenviar."
           />
         </Flex>
+        
       </Flex>
       <Flex
-        w={['0px', '0%', '0%', '60%']}
+        w={['0px', '0%', '0%','60%']}
         h="100%"
         backgroundImage="url('/img/auth_background.svg')"
         backgroundSize="cover"

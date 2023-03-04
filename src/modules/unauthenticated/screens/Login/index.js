@@ -1,9 +1,30 @@
 import { Flex, Image } from '@chakra-ui/react'
 import { Text, Input, Link, Button } from 'components'
 import { useNavigate } from 'react-router-dom'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 
 export const LoginScreen = () => {
   const navigate = useNavigate()
+
+  const { handleSubmit, values, handleChange, errors } = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email('E-mail inválido')
+        .required('E-mail é obrigatório.'),
+      password: Yup.string()
+        .min(6, 'Senha deve ter ao menos 6 caracteres')
+        .required('Senha é obrigatório.')
+    }),
+    onSubmit: (data) => {
+      console.log({data})
+    }
+  })
+  console.log({ values, errors })
   return (
     <Flex flexDir="row" w="100vw" h="100vh">
       <Flex
@@ -23,15 +44,35 @@ export const LoginScreen = () => {
             height="48px"
           />
           <Text.ScreenTitle mt="48px">Login</Text.ScreenTitle>
-          <Input mt="24px" placeholder="email@example.com" />
-          <Input.Password mt="16px" placeholder="**********" />
+          <Input
+            id="email"
+            name="email"
+            value={values.email}
+            mt="24px"
+            placeholder="email@example.com"
+            onChange={handleChange}
+            error={errors.email}
+          />
+          <Input.Password
+            id="password"
+            name="password"
+            value={values.password}
+            mt="16px"
+            placeholder="******"
+            onChange={handleChange}
+            error={errors.password}
+          />
           <Flex mt="8px" w="100%" alignItems="center" justifyContent="flex-end">
-            <Link>Esqueceu sua senha?</Link>
+            <Link onClick={() => navigate('/forgot-password')}>
+              Esqueceu sua senha?
+            </Link>
           </Flex>
-          <Button mt="24px">Login</Button>
+          <Button onClick={handleSubmit} mb="12px" mt="24px">
+            Login
+          </Button>
           <Link.Action
             onClick={() => navigate('/signup')}
-            mt="48px"
+            mt="8px"
             text="Não possui conta?"
             actionText="Cadastre-se aqui"
           />
