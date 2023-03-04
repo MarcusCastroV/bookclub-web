@@ -21,7 +21,7 @@ export const LoginScreen = () => {
         .required('Senha é obrigatório.')
     }),
     onSubmit: (data) => {
-      console.log({data})
+      console.log({ data })
     }
   })
   console.log({ values, errors })
@@ -45,13 +45,14 @@ export const LoginScreen = () => {
           />
           <Text.ScreenTitle mt="48px">Login</Text.ScreenTitle>
           <Input
+            type="email"
             id="email"
             name="email"
             value={values.email}
-            mt="24px"
-            placeholder="email@example.com"
             onChange={handleChange}
             error={errors.email}
+            mt="24px"
+            placeholder="email@example.com"
           />
           <Input.Password
             id="password"
