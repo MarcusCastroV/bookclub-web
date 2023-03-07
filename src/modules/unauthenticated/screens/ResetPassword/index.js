@@ -1,11 +1,38 @@
-import { Flex, Image } from '@chakra-ui/react'
+import { Flex, Image, useToast } from '@chakra-ui/react'
 import { Text, Input, Button, Link } from 'components'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { useMutation } from 'react-query'
+import { resetPasswordCall } from 'services/api/request'
 
 export const ResetPasswordScreen = () => {
   const navigate = useNavigate()
+  const toast = useToast()
+  const [searchParams] = useSearchParams()
+
+  
+
+  const mutation = useMutation((data) => resetPasswordCall(data), {
+    onError: (error) => {
+        toast({
+          title: 'Falha na requisição.',
+          description: error?.response?.data?.error || 'Por favor, tente novamente.',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        })
+      },
+    onSuccess: () => {
+      toast({
+        title: 'Senha alterada com sucesso!',
+        status: 'success',
+        duration: 3000,
+        isClosable: true
+      })
+      navigate(`/`)
+    }
+  })
 
   const { handleSubmit, values, handleChange, errors } = useFormik({
     initialValues: {
@@ -15,7 +42,7 @@ export const ResetPasswordScreen = () => {
     },
     validationSchema: Yup.object({
       token: Yup.string()
-        .length(4, 'Token deve conter 4 caracters')
+        .length(6, 'Token deve conter 6 caracters')
         .required('Token é obrigatório.'),
       password: Yup.string()
         .min(6, 'Senha deve ter ao menos 6 caracteres.')
@@ -26,7 +53,11 @@ export const ResetPasswordScreen = () => {
         .oneOf([Yup.ref('password'), null], 'Senhas não são iguais.')
     }),
     onSubmit: (data) => {
-      navigate('/login')
+      mutation.mutate({
+        email: searchParams.get('email'),
+        token: data.token,
+        password: data.password
+      })
     }
   })
 
@@ -52,14 +83,16 @@ export const ResetPasswordScreen = () => {
           <Text mt="24px">
             Digite o código enviado e uma nova senha nos campos abaixo:
           </Text>
-          <Input id="token"
+          <Input
+            id="token"
             name="token"
             value={values.token}
             onChange={handleChange}
-            error={errors.token}mt="24px"
-            placeholder="ex: 0000" 
-            maxLength={4}
-            />
+            error={errors.token}
+            mt="24px"
+            placeholder="ex: 0000"
+            maxLength={6}
+          />
           <Input.Password
             id="password"
             name="password"
@@ -78,7 +111,7 @@ export const ResetPasswordScreen = () => {
             mt="24px"
             placeholder="Confirmar nova senha"
           />
-          <Button mb="12px" mt="24px" onClick={handleSubmit}>
+          <Button isLoading={mutation.isLoading} mb="12px" mt="24px" onClick={handleSubmit}>
             Salvar
           </Button>
           <Link.Action
