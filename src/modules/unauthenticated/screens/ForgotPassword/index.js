@@ -1,6 +1,6 @@
 import { Flex, Image, useToast } from '@chakra-ui/react'
 import { Text, Input, Button } from 'components'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useMutation } from 'react-query'
@@ -9,9 +9,7 @@ import { forgotPasswordCall } from 'services/api/request'
 export const ForgotPasswordScreen = () => {
   const navigate = useNavigate()
   const toast = useToast()
-  const [searchParams] = useSearchParams()
 
-  console.log({email: searchParams.get('email')})
   const mutation = useMutation((data) => forgotPasswordCall(data), {
     onError: (error) => {
         toast({
@@ -22,7 +20,7 @@ export const ForgotPasswordScreen = () => {
           isClosable: true,
         })
       },
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast({
         title: 'E-mail enviado com sucesso!',
         status: 'success',

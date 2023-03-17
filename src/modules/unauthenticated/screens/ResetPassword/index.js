@@ -83,6 +83,7 @@ export const ResetPasswordScreen = () => {
           <Text mt="24px">
             Digite o código enviado e uma nova senha nos campos abaixo:
           </Text>
+          
           <Input
             id="token"
             name="token"
