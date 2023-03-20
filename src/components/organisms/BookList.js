@@ -9,13 +9,24 @@ export const BookList = () => {
   return (
     <Flex
       flexDir="column"
-      mt="48px"
+      mt={['24px', '48px']}
       paddingX={['24px', '48px', '80px', '112px']}
     >
       <Text.ScreenTitle> Destaques </Text.ScreenTitle>
-      <Flex flexDir="row" mt="24px">
+      <Flex
+        flexDir="row"
+        mt={['12px', '24px']}
+        overflowX={['scroll', 'auto']}
+        css={{
+          '::-webkit-scrollbar': {
+            display: 'none'
+          }
+        }}
+      >
         {data?.data &&
-          data?.data.map((item) => <BookCard key={`book_${item.id}`} {...item} />)}
+          data?.data.map((item) => (
+            <BookCard key={`book_${item.id}`} {...item} />
+          ))}
       </Flex>
     </Flex>
   )

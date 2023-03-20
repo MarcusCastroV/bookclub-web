@@ -59,14 +59,17 @@ export const UserMenu = () => {
           <Avatar
             name={userStore?.user?.name}
             src={userStore?.user?.avatar_url}
-            size="md"
+            w={['36px', '48px']}
+            h={['36px', '48px']}
             borderWidth="2px"
             borderColor="brand.primary"
             bg="brand.greyLight"
-            mr="12px"
+            mr={['6px', '12px']}
             color="brand.black"
           />
-          <Text fontWeight="bold">{userStore?.user?.name}</Text>
+          <Flex display={['none', 'flex']}>
+            <Text fontWeight="bold">{userStore?.user?.name}</Text>
+          </Flex>
           <ChevronDownIcon boxSize="24px" />
         </Flex>
       </MenuButton>
