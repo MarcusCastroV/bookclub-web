@@ -1,7 +1,9 @@
 import { Flex, Image } from '@chakra-ui/react'
 import { SearchBar, UserMenu } from 'components'
+import { useNavigate } from 'react-router-dom'
 
 export const NavBar = () => {
+  const navigate = useNavigate()
   return (
     <Flex
       w="100vw"
@@ -11,9 +13,16 @@ export const NavBar = () => {
       paddingX={['24px', '48px', '80px', '112px']}
       paddingTop={['24px']}
     >
-      <Image src="/img/logo.svg" alt="BookClub Logo" w={["100px","160px"]} height="48px" />
+      <Image
+        src="/img/logo.svg"
+        alt="BookClub Logo"
+        w={['100px', '160px']}
+        height="48px"
+        cursor="pointer"
+        onClick={() => navigate("/home")}
+      />
       <Flex display={['none', 'flex']}>
-      <SearchBar/>
+        <SearchBar />
       </Flex>
       <UserMenu />
     </Flex>

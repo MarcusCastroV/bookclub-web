@@ -16,7 +16,6 @@ export const userSlice = createSlice({
       state.token = action.payload.token
     },
     setAll: (state, action) => {
-      console.log({ state, action })
       state.user = action.payload.user
       state.token = action.payload.token
     }

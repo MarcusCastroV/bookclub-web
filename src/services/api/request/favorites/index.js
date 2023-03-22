@@ -1,20 +1,21 @@
 import { api } from 'services/api'
 
-export const getHighlihtedBooks = () =>
-  api.get('/book?highlighted=true', {
+export const getFavorites = (data) =>
+  api.get('/userbook', {
     headers: {
       Authorization: `bearer ${localStorage.getItem('@bookclub_token')}`
     }
   })
 
-export const getBooksByCategory = (id) =>
-  api.get(`/book?category_id=${id}`, {
+export const addBookToFavorites = (data) =>
+  api.post('/userbook', data, {
     headers: {
       Authorization: `bearer ${localStorage.getItem('@bookclub_token')}`
     }
   })
-export const getBookDetail = (id) =>
-  api.get(`/book/${id}`, {
+
+export const deleteBookFromFavorites = (id) =>
+  api.delete(`/userbook/${id}`, {
     headers: {
       Authorization: `bearer ${localStorage.getItem('@bookclub_token')}`
     }

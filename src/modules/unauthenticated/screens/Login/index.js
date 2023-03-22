@@ -58,7 +58,6 @@ export const LoginScreen = () => {
       mutation.mutate(data)
     }
   })
-  console.log({ values, errors })
   return (
     <Flex flexDir="row" w="100vw" h="100vh">
       <Flex
