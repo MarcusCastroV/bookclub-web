@@ -1,10 +1,9 @@
 /* eslint-disable camelcase */
-
 import { Flex } from '@chakra-ui/react'
 import { Text } from 'components/atoms'
 import { useNavigate } from 'react-router-dom'
 
-export const BookCard = ({ id, cover_url, name, author }) => {
+export const AuthorCard = ({ id, avatar_url, name }) => {
   const navigate = useNavigate()
   return (
     <Flex
@@ -14,10 +13,10 @@ export const BookCard = ({ id, cover_url, name, author }) => {
       cursor="pointer"
       mr={["36px", "16px"]}
       mb="16px"
-      onClick={() => navigate(`/book-detail/${id}`)}
+      onClick={() => navigate(`/author-detail/${id}`)}
     >
       <Flex
-        backgroundImage={cover_url}
+        backgroundImage={avatar_url}
         backgroundPosition="center"
         backgroundSize="cover"
         h={['180px', '230px']}
@@ -33,9 +32,6 @@ export const BookCard = ({ id, cover_url, name, author }) => {
         fontWeight="600"
       >
         {name}
-      </Text>
-      <Text textAlign="center" mt="4px" fontSize="10px">
-        {author?.name}
       </Text>
     </Flex>
   )
